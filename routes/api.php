@@ -24,3 +24,5 @@ Route::apiResource('products', ProductsController::class);
 
 Route::post('register',[\App\Http\Controllers\Api\AdminController::class,'register']);
 Route::post('login',[\App\Http\Controllers\Api\AdminController::class,'login']);
+
+

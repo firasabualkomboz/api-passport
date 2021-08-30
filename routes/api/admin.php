@@ -14,10 +14,10 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+
 Route::post('admin/login',[\App\Http\Controllers\Api\LoginController::class,'adminLogin']);
 
 Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:admin'] ],function(){
 
-            //
 
 });

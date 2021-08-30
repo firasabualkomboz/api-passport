@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -18,26 +19,16 @@ class ProductsController extends Controller
         $products = Product::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
+
     {
-        $request->validate([
-
-            'name' => 'required',
-            'price'=>'required',
-        ]);
-
         $product = new Product();
         $product->name = $request->name;
         $product->price = $request->price;
         $product->save();
         return response($product,201);
-    }
+
+    } // END STORE
 
     /**
      * Display the specified resource.

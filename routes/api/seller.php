@@ -14,16 +14,16 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::post('seller/login',[\App\Http\Controllers\Api\LoginController::class,'sellerLogin']);
-Route::post('seller/register',[\App\Http\Controllers\Api\LoginController::class,'sellerregister']);
+Route::post('seller/login',[\App\Http\Controllers\Api\SellerController::class,'login']);
+Route::post('seller/register',[\App\Http\Controllers\Api\SellerController::class,'register']);
 
 Route::group( ['prefix' => 'seller','middleware' => ['auth:seller-api','scopes:seller'] ],function(){
 
 
-    Route::get('test-seller', function () {
+            Route::get('product_seller', function () {
 
-    return "test seller";
+            return "test seller";
 
-    });
+            });
 
 });
