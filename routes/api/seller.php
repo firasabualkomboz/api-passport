@@ -17,13 +17,9 @@ use App\Http\Controllers\LoginController;
 Route::post('seller/login',[\App\Http\Controllers\Api\SellerController::class,'login']);
 Route::post('seller/register',[\App\Http\Controllers\Api\SellerController::class,'register']);
 
-Route::group( ['prefix' => 'seller','middleware' => ['auth:seller-api','scopes:seller'] ],function(){
+Route::group( ['prefix' => 'seller','middleware' => [] ],function(){ //'auth:seller-api','scopes:seller'
 
+    Route::apiResource('products',App\Http\Controllers\Api\ProductsController::class);
 
-            Route::get('product_seller', function () {
-
-            return "test seller";
-
-            });
 
 });

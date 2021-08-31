@@ -14,8 +14,8 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::post('customer/login',[\App\Http\Controllers\Api\LoginController::class,'customerLogin']);
-Route::post('customer/register',[\App\Http\Controllers\Api\LoginController::class,'customerregister']);
+Route::post('customer/login',[\App\Http\Controllers\Api\CustomerController::class,'login']);
+Route::post('customer/register',[\App\Http\Controllers\Api\CustomerController::class,'register']);
 
 Route::group( ['prefix' => 'user','middleware' => ['auth:user-api','scopes:user'] ],function(){
 

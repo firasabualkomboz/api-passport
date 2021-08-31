@@ -14,9 +14,10 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        $products = Product::all();
+        $product = Product::all();
+        return $product;
     }
 
     public function store(ProductRequest $request)
@@ -26,41 +27,48 @@ class ProductsController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->save();
-        return response($product,201);
 
+        return response()->json([
+            'data'    => $product,
+            'success' => true ,
+            'message' => 'successfully added product '
+
+        ] , 201);
     } // END STORE
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product)
+
     {
-        //
+
+        $request->validate([
+            'name' => 'sometimes|required',
+            'price' => 'sometimes',
+        ]);
+
+
+        $product = Product::findOrFail($product);
+
+
+        $product->update($request->all());
+
+            return response([
+                'product' =>  $product,
+                'message' => 'Update successfully'
+            ], 200);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return response::json([
+            'message' => "Product $id deleted",
+        ] );
     }
 }
